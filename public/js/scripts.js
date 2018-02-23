@@ -5,42 +5,70 @@ $(function() {
     url: " https://api.darksky.net/forecast/301f3e024f1c4ab02d90bd8af795b98d/42.738270,-73.654638",
     dataType: "jsonp"
   }).done(function(data) {
+    
     console.log(data);
+    
+    //Grab temp and summary, then add to frontend
     var temp = Math.round(data.currently.temperature);
-    var precipitation = data.currently.precipType;
-    
-    if(precipitation) {
-      $(".condition").text(precipitation);
-    }else {
-      $(".condition").text("Clear");
-    }
-    
+    var summary = data.currently.summary;
     $(".temp").html(temp + "&#176;");
+    $(".summary").html(summary);
+    
+    
+    // data.currently.icon ="fog"; //Testing Purposes
     
     //Skycon Weather Icons
     $("#skycons").attr("id", data.currently.icon);
     
-    //Chose Icon Color
-    if($("#skycons").attr("id", "clear-day")) {
-      var icons = new Skycons({"color": "#428aff"});
-    } else if($("#skycons").attr("id", "clear-night")) {
+    //Chose Icon Color - And background Images
+    if(data.currently.icon === "clear-day") {
+      var icons = new Skycons({"color": "yellow"});
+      $("body").addClass("clear-day");
+    } 
+    
+    if(data.currently.icon === "clear-night") {
       var icons = new Skycons({"color": "#033259"});
-    } else if($("#skycons").attr("id", "partly-cloudy-day")) {
-      var icons = new Skycons({"color": "#c6cace"});
-    } else if($("#skycons").attr("id", "partly-cloudy-night")) {
-      var icons = new Skycons({"color": "#7e8082"});
-    } else if($("#skycons").attr("id", "cloudy")) {
-      var icons = new Skycons({"color": "#c6cace"});
-    } else if($("#skycons").attr("id", "rain")) {
+      $("body").addClass("clear-night");
+    } 
+    
+    if(data.currently.icon === "partly-cloudy-day") {
+      var icons = new Skycons({"color": "gray"});
+      $("body").addClass("partly-cloudy-day");
+    } 
+    
+    if(data.currently.icon === "partly-cloudy-night") {
+      var icons = new Skycons({"color": "gray"});
+      $("body").addClass("partly-cloudy-night");
+    } 
+    
+    if(data.currently.icon === "cloudy") {
+      var icons = new Skycons({"color": "gray"});
+      $("body").addClass("cloudy");
+    } 
+    
+    if(data.currently.icon === "rain") {
       var icons = new Skycons({"color": "#65abf2"});
-    } else if($("#skycons").attr("id", "sleet")) {
+      $("body").addClass("rain");
+    } 
+    
+    if(data.currently.icon === "sleet") {
       var icons = new Skycons({"color": "#97c2ed"});
-    } else if($("#skycons").attr("id", "snow")) {
-      var icons = new Skycons({"color": "blue"});
-    } else if($("#skycons").attr("id", "wind")) {
+      $("body").addClass("sleet");
+    } 
+    
+    if(data.currently.icon === "snow") {
+      var icons = new Skycons({"color": "#4b91d8"});
+      $("body").addClass("snow");
+    } 
+    
+    if(data.currently.icon === "wind") {
       var icons = new Skycons({"color": "#bec1c4"});
-    } else if($("#skycons").attr("id", "fog")) {
+      $("body").addClass("wind");
+    } 
+    
+    if(data.currently.icon === "fog") {
       var icons = new Skycons({"color": "#bec1c4"});
+      $("body").addClass("fog");
     }
     
     var list  = [
@@ -53,17 +81,7 @@ $(function() {
       icons.set(list[i], list[i]);
       icons.play();
     } 
-      
-  });
-  
-  //Change Background Image based on weather
-  if($("#snow").attr("id", "snow")) {
-    $("body").addClass("snow");
     
-  } 
-  
-  if($("#rain").attr("id", "rain")) {
-    $("body").addClass("rain");
-  }
+  });
 
 });

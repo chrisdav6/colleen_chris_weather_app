@@ -15,9 +15,41 @@ body {
   margin: 0 auto; }
 
 .snow {
-  background: url(https://images.pexels.com/photos/60561/winter-snow-nature-60561.jpeg?h=350&dpr=2&auto=compress&cs=tinysrgb) no-repeat;
+  background: url(../img/snow.jpg) no-repeat;
   background-size: cover; }
 
 .rain {
-  background: url(https://images.pexels.com/photos/21492/pexels-photo.jpg?h=350&dpr=2&auto=compress&cs=tinysrgb) no-repeat;
+  background: url(../img/rain.jpg) no-repeat;
+  background-size: cover; }
+
+.partly-cloudy-day {
+  background: url(../img/partly-cloudy.jpg) no-repeat;
+  background-size: cover; }
+
+.partly-cloudy-night {
+  background: url(../img/partly-cloudy-night.jpg) no-repeat;
+  background-size: cover; }
+
+.clear-day {
+  background: url(../img/clear-day.jpg) no-repeat;
+  background-size: cover; }
+
+.clear-night {
+  background: url(../img/clear-night.jpg) no-repeat;
+  background-size: cover; }
+
+.cloudy {
+  background: url(../img/cloudy.jpg) no-repeat;
+  background-size: cover; }
+
+.sleet {
+  background: url(../img/sleet.jpg) no-repeat;
+  background-size: cover; }
+
+.wind {
+  background: url(../img/wind.jpg) no-repeat;
+  background-size: cover; }
+
+.fog {
+  background: url(../img/fog.jpg) no-repeat;
   background-size: cover; }
