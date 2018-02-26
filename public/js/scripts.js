@@ -12,7 +12,7 @@ $(function() {
     var sayings = {
         clear: [
           "It's a beautiful day to be in Love with Colleen Davis!",
-          "Christopher Loves Colleen Davis on this beautiful day more times than an infinate javascript loop!",
+          "Christopher Loves Colleen Davis on this beautiful day more times than an infinite javascript loop!",
           "Colleen Davis, I love you 1 billiondy more than this beautiful day!",
           "I could not have asked for a more beautiful day to be in Love with Colleen Davis",
           "On this wonderful day, Christopher Loves Colleen",
