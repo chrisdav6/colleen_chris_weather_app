@@ -14,6 +14,10 @@ body {
   background: rgba(255, 255, 255, 0.7);
   margin: 0 auto; }
 
+#icon {
+  margin: 0 auto;
+  width: 35%; }
+
 .snow {
   background: url(../img/snow.jpg) no-repeat;
   background-size: cover; }
@@ -22,7 +26,7 @@ body {
   background: url(../img/rain.jpg) no-repeat;
   background-size: cover; }
 
-.partly-cloudy-day {
+.mostly-cloudy-day {
   background: url(../img/partly-cloudy.jpg) no-repeat;
   background-size: cover; }
 

@@ -6,9 +6,16 @@
       
       <div class="card py-3 mx-auto">
         <div class="card-body">
-          <canvas id="skycons" class="weatherIcons" width="150" height="150"></canvas>
-          <h1 class="display-2 temp mb-2"></h1>
-          <h2 class="summary"></h2>
+          <div id="icon"></div>
+          <div class="d-flex justify-content-center align-items-center">
+            <h1 class="display-2 d-inline-block temp my-0"></h1>
+            <div class="d-flex flex-column text-justify ml-2">
+              <h4 class="feels"></h4> 
+              <h3 class="summary"></h3>
+            </div>
+          </div>
+          <hr class="mb-4">
+          <p class="forecast"></p>
           <hr class="my-4">
           <h4 class="card-text message"></h4>
           <!--<a href="#" class="btn btn-info btn-lg img1">New Weather Condition</a> -->

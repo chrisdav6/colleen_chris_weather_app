@@ -20,6 +20,11 @@ body {
   margin: 0 auto;
 }
 
+#icon {
+  margin: 0 auto;
+  width: 35%;
+}
+
 .snow {
   background: url(../img/snow.jpg) no-repeat;
   background-size: cover;
@@ -30,7 +35,7 @@ body {
   background-size: cover;
 }
 
-.partly-cloudy-day {
+.mostly-cloudy-day {
   background: url(../img/partly-cloudy.jpg) no-repeat;
   background-size: cover;
 }

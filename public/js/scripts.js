@@ -1,13 +1,24 @@
 
 $(function() {
   
+  var forecast = "";
+  
+  //Forecast AJAX Request
   $.ajax({
-    url: " https://api.darksky.net/forecast/301f3e024f1c4ab02d90bd8af795b98d/42.738270,-73.654638",
+    url: "https://api.wunderground.com/api/3760db94f98044d8/forecast/q/NY/Troy.json",
+    dataType: "jsonp"
+  }).done(function(data) {
+    forecast = data.forecast.txt_forecast.forecastday[0].fcttext;
+  });
+  
+  //Current Temp AJAX Request
+  $.ajax({
+    url: "https://api.wunderground.com/api/3760db94f98044d8/conditions/q/NY/Troy.json",
     dataType: "jsonp"
   }).done(function(data) {
     
     console.log(data);
-    
+
     //Sayings
     var sayings = {
         clear: [
@@ -67,90 +78,76 @@ $(function() {
     var randomFog = Math.floor(Math.random() * sayings.fog.length);
     
     //Grab temp and summary, then add to frontend
-    var temp = Math.round(data.currently.temperature);
-    var summary = data.currently.summary;
+    var temp = Math.round(data.current_observation.temp_f);
+    var feelsTemp = data.current_observation.feelslike_f;
+    var summary = data.current_observation.weather;
+    
+    //For Testing
+    var summary= "Mostly Cloudy";
+    
     $(".temp").html(temp + "&#176;");
+    $(".feels").html("Feels like " + feelsTemp + "&#176;");
     $(".summary").html(summary);
+    $(".forecast").html(forecast);
     
+   
     
-    // data.currently.icon ="fog"; //Testing Purposes
+
+
+    // if(summary === "clear") {
+    //   $("body").addClass("clear-day");
+    //   $(".message").text(sayings.clear[randomClear]);
+    // }
+  
     
-    //Skycon Weather Icons
-    $("#skycons").attr("id", data.currently.icon);
+    // if(summary === "clear-night") {
+    //   $("body").addClass("clear-night");
+    //   $(".message").text(sayings.clearNight[randomClearNight]);
+    // } 
     
-    //Chose Icon Color - And background Images
-    if(data.currently.icon === "clear-day") {
-      var icons = new Skycons({"color": "yellow"});
-      $("body").addClass("clear-day");
-      $(".message").text(sayings.clear[randomClear]);
-    } 
-    
-    if(data.currently.icon === "clear-night") {
-      var icons = new Skycons({"color": "#033259"});
-      $("body").addClass("clear-night");
-      $(".message").text(sayings.clearNight[randomClearNight]);
-    } 
-    
-    if(data.currently.icon === "partly-cloudy-day") {
-      var icons = new Skycons({"color": "gray"});
-      $("body").addClass("partly-cloudy-day");
+    if(summary === "Mostly Cloudy") {
+      $("body").addClass("mostly-cloudy-day");
+      $("#icon").append("<img src='http://icons.wxug.com/i/c/v4/mostlycloudy.svg'>");
       $(".message").text(sayings.partlyCloudyDay[randomPartlyCloudyDay]);
     } 
     
-    if(data.currently.icon === "partly-cloudy-night") {
-      var icons = new Skycons({"color": "gray"});
-      $("body").addClass("partly-cloudy-night");
-      $(".message").text(sayings.partlyCloudyNight[randomPartlyCloudyNight]);
-    } 
+    // if(summary === "partly-cloudy-night") {
+    //   $("body").addClass("partly-cloudy-night");
+    //   $(".message").text(sayings.partlyCloudyNight[randomPartlyCloudyNight]);
+    // } 
     
-    if(data.currently.icon === "cloudy") {
-      var icons = new Skycons({"color": "gray"});
-      $("body").addClass("cloudy");
-      $(".message").text(sayings.cloudy[randomCloudy]);
-    } 
+    // if(summary === "cloudy") {
+    //   $("body").addClass("cloudy");
+    //   $(".message").text(sayings.cloudy[randomCloudy]);
+    // } 
     
-    if(data.currently.icon === "rain") {
-      var icons = new Skycons({"color": "#65abf2"});
-      $("body").addClass("rain");
-      $(".message").text(sayings.rain[randomRain]);
-    } 
+    // if(summary === "rain") {
+    //   $("body").addClass("rain");
+    //   $(".message").text(sayings.rain[randomRain]);
+    // } 
     
-    if(data.currently.icon === "sleet") {
-      var icons = new Skycons({"color": "#97c2ed"});
-      $("body").addClass("sleet");
-      $(".message").text(sayings.sleet[randomSleet]);
-    } 
+    // if(summary === "sleet") {
+    //   $("body").addClass("sleet");
+    //   $(".message").text(sayings.sleet[randomSleet]);
+    // } 
     
-    if(data.currently.icon === "snow") {
-      var icons = new Skycons({"color": "#4b91d8"});
-      $("body").addClass("snow");
-      $(".message").text(sayings.snow[randomSnow]);
-    } 
+    // if(summary === "snow") {
+    //   $("body").addClass("snow");
+    //   $(".message").text(sayings.snow[randomSnow]);
+    // } 
     
-    if(data.currently.icon === "wind") {
-      var icons = new Skycons({"color": "#bec1c4"});
-      $("body").addClass("wind");
-      $(".message").text(sayings.wind[randomWind]);
-    } 
+    // if(summary === "wind") {
+    //   $("body").addClass("wind");
+    //   $(".message").text(sayings.wind[randomWind]);
+    // } 
     
-    if(data.currently.icon === "fog") {
-      var icons = new Skycons({"color": "#bec1c4"});
-      $("body").addClass("fog");
-      $(".message").text(sayings.fog[randomFog]);
-    }
-    
-    var list  = [
-      "clear-day", "clear-night", "partly-cloudy-day",
-      "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
-      "fog"
-    ];
+    // if(summary === "fog") {
+    //   $("body").addClass("fog");
+    //   $(".message").text(sayings.fog[randomFog]);
+    // }
 
-    for(var i = list.length; i--; ) {
-      icons.set(list[i], list[i]);
-      icons.play();
-    } 
     
-  });
+   });
   
   
 });
