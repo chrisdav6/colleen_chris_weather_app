@@ -8,6 +8,8 @@ $(function() {
 
     console.log(data);
     var forecast = data.forecast.txt_forecast.forecastday[0].fcttext;
+    var highTemp = data.forecast.simpleforecast.forecastday[0].high.fahrenheit;
+    var lowTemp = data.forecast.simpleforecast.forecastday[0].low.fahrenheit;
 
     //Current Temp AJAX Request
     $.ajax({
@@ -81,7 +83,7 @@ $(function() {
       // summary = "Snow";
 
       $(".temp").html(temp + "&#176;");
-      $(".feels").html("Feels like " + feelsTemp + "&#176;");
+      $(".highLow").html("High " + highTemp + "&#176; / Low " + lowTemp + "&#176;");
       $(".summary").html(summary);
       $(".forecast").html(forecast);
 
