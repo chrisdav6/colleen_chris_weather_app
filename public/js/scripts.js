@@ -80,10 +80,10 @@ $(function() {
       var summary = data.current_observation.weather;
 
       //For Testing
-      // summary = "Snow";
+      // summary = "Mostly Sunny";
 
       $(".temp").html(temp + "&#176;");
-      $(".highLow").html("High " + highTemp + "&#176; / Low " + lowTemp + "&#176;");
+      $(".highLow").html(lowTemp + "&#176; / " + highTemp + "&#176;");
       $(".summary").html(summary);
       $(".forecast").html(forecast);
 
