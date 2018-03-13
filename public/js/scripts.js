@@ -83,7 +83,7 @@ $(function() {
       // summary = "Mostly Sunny";
 
       $(".temp").html(temp + "&#176;");
-      $(".highLow").html(lowTemp + "&#176; / " + highTemp + "&#176;");
+      $(".highLow").html("<i class='fas fa-long-arrow-alt-down'></i> " + lowTemp + "&#176; / <i class='fas fa-long-arrow-alt-up'></i> " + highTemp + "&#176;");
       $(".summary").html(summary);
       $(".forecast").html(forecast);
 
