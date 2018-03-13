@@ -10,10 +10,10 @@ $(function() {
     var forecast = data.forecast.txt_forecast.forecastday[0].fcttext;
     var highTemp = data.forecast.simpleforecast.forecastday[0].high.fahrenheit;
     var lowTemp = data.forecast.simpleforecast.forecastday[0].low.fahrenheit;
-
+    
     //Current Temp AJAX Request
     $.ajax({
-      url: "https://api.wunderground.com/api/3760db94f98044d8/conditions/q/NY/Troy.json",
+      url: "https://api.wunderground.com/api/3760db94f98044d8/conditions_v11/q/NY/Troy.json",
       dataType: "jsonp"
     }).done(function(data) {
 
@@ -80,7 +80,7 @@ $(function() {
       var summary = data.current_observation.weather;
 
       //For Testing
-      // summary = "Mostly Sunny";
+      // summary = "Thunderstorm";
 
       $(".temp").html(temp + "&#176;");
       $(".highLow").html("<i class='fas fa-long-arrow-alt-down'></i> " + lowTemp + "&#176; / <i class='fas fa-long-arrow-alt-up'></i> " + highTemp + "&#176;");
@@ -90,42 +90,157 @@ $(function() {
 
       switch (summary) {
         case "Clear":
-        case "Mostly Sunny":
-        case "Partly Sunny":
           $("body").removeClass().addClass("clear-day");
           $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/clear.svg'>");
           $(".message").text(sayings.clear[randomClear]);
           break;
+          
+        case "Mostly Sunny":
+          $("body").removeClass().addClass("clear-day");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/mostlysunny.svg'>");
+          $(".message").text(sayings.clear[randomClear]);
+          break;
+          
+        case "Partly Sunny":
+          $("body").removeClass().addClass("clear-day");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/partlysunny.svg'>");
+          $(".message").text(sayings.clear[randomClear]);
+          break;
+          
         case "Mostly Cloudy":
-        case "Partly Cloudy":
         case "Overcast":
+        case "Scattered Clouds":
           $("body").removeClass().addClass("mostly-cloudy-day");
           $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/mostlycloudy.svg'>");
           $(".message").text(sayings.partlyCloudyDay[randomPartlyCloudyDay]);
           break;
+          
+        case "Partly Cloudy":
+          $("body").removeClass().addClass("mostly-cloudy-day");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/partlycloudy.svg'>");
+          $(".message").text(sayings.partlyCloudyDay[randomPartlyCloudyDay]);
+          break;
+          
         case "Cloudy":
           $("body").removeClass().addClass("cloudy");
           $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/cloudy.svg'>");
           $(".message").text(sayings.cloudy[randomCloudy]);
           break;
+          
         case "Snow":
         case "Flurries":
+        case "Light Snow":
+        case "Heavy Snow":
+        case "Low Drifting Snow":
+        case "Light Low Drifting Snow":
+        case "Heavy Low Drifting Snow":
+        case "Blowing Snow":
+        case "Light Blowing Snow":
+        case "Heavy Blowing Snow":
+        case "Snow Showers":
+        case "Light Snow Showers":
+        case "Heavy Snow Showers":
+        case "Snow Blowing Snow Mist":
+        case "Light Snow Blowing Snow Mist":
+        case "Heavy Snow Blowing Snow Mist":
+        case "Thunderstorms and Snow":
+        case "Light Thunderstorms and Snow":
+        case "Heavy Thunderstorms and Snow":
+        case "Squalls":
           $("body").removeClass().addClass("snow");
           $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/snow.svg'>");
           $(".message").text(sayings.snow[randomSnow]);
           break;
+          
         case "Fog":
-        case "Hazy":
+        case "Light Fog":
+        case "Heavy Fog":
+        case "Fog Patches":
+        case "Light Fog Patches":
+        case "Heavy Fog Patches":
+        case "Haze":
+        case "Light Haze":
+        case "Heavy Haze":
+        case "Freezing Fog":
+        case "Light Freezing Fog":
+        case "Heavy Freezing Fog":
+        case "Patches of Fog":
+        case "Shallow Fog":
+        case "Partial Fog":
           $("body").removeClass().addClass("fog");
           $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/fog.svg'>");
           $(".message").text(sayings.fog[randomFog]);
           break;
+          
         case "Rain":
+        case "Light Rain":
+        case "Heavy Rain":
+        case "Drizzle":
+        case "Light Drizzle":
+        case "Heavy Drizzle":
+        case "Mist":
+        case "Light Mist":
+        case "Heavy Mist":
+        case "Rain Mist":
+        case "Light Rain Mist":
+        case "Heavy Rain Mist":
+        case "Rain Showers":
+        case "Light Rain Showers":
+        case "Heavy Rain Showers":
           $("body").removeClass().addClass("rain");
           $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/rain.svg'>");
           $(".message").text(sayings.rain[randomRain]);
           break;
+          
+        case "Thunderstorm":
+        case "Light Thunderstorm":
+        case "Heavy Thunderstorm":
+        case "Thunderstorms and Rain":
+        case "Light Thunderstorms and Rain":
+        case "Heavy Thunderstorms and Rain":
+        case "Thunderstorms and Ice Pellets":
+        case "Light Thunderstorms and Ice Pellets":
+        case "Heavy Thunderstorms and Ice Pellets":
+        case "Thunderstorms with Hail":
+        case "Light Thunderstorms with Hail":
+        case "Heavy Thunderstorms with Hail":
+        case "Thunderstorms with Small Hail":
+        case "Light Thunderstorms with Small Hail":
+        case "Heavy Thunderstorms with Small Hail":
+          $("body").removeClass().addClass("rain");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/tstorms.svg'>");
+          $(".message").text(sayings.rain[randomRain]);
+          break;
+          
         case "Sleet":
+        case "Snow Grains":
+        case "Light Snow Grains":
+        case "Heavy Snow Grains":
+        case "Ice Crystals":
+        case "Light Ice Crystals":
+        case "Heavy Ice Crystals":
+        case "Ice Pellets":
+        case "Light Ice Pellets":
+        case "Heavy Ice Pellets":
+        case "Hail":
+        case "Light Hail":
+        case "Heavy Hail":
+        case "Ice Pellet Showers":
+        case "Light Ice Pellet Showers":
+        case "Heavy Ice Pellet Showers":
+        case "Hail Showers":
+        case "Light Hail Showers":
+        case "Heavy Hail Showers":
+        case "Small Hail Showers":
+        case "Light Small Hail Showers":
+        case "Heavy Small Hail Showers":
+        case "Freezing Drizzle":
+        case "Light Freezing Drizzle":
+        case "Heavy Freezing Drizzle":
+        case "Freezing Rain":
+        case "Light Freezing Rain":
+        case "Heavy Freezing Rain":
+        case "Small Hail":
           $("body").removeClass().addClass("sleet");
           $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/sleet.svg'>");
           $(".message").text(sayings.sleet[randomSleet]);
@@ -137,3 +252,50 @@ $(function() {
   });
 
 });
+
+
+
+/* List of icons
+
+http://icons.wxug.com/i/c/v4/unknown.svg
+http://icons.wxug.com/i/c/v4/chanceflurries.svg
+http://icons.wxug.com/i/c/v4/chancerain.svg
+http://icons.wxug.com/i/c/v4/chancesleet.svg
+http://icons.wxug.com/i/c/v4/chancesnow.svg
+http://icons.wxug.com/i/c/v4/chancetstorms.svg
+http://icons.wxug.com/i/c/v4/clear.svg
+http://icons.wxug.com/i/c/v4/cloudy.svg
+http://icons.wxug.com/i/c/v4/flurries.svg
+http://icons.wxug.com/i/c/v4/fog.svg
+http://icons.wxug.com/i/c/v4/hazy.svg
+http://icons.wxug.com/i/c/v4/mostlycloudy.svg
+http://icons.wxug.com/i/c/v4/mostlysunny.svg
+http://icons.wxug.com/i/c/v4/partlycloudy.svg
+http://icons.wxug.com/i/c/v4/partlysunny.svg
+http://icons.wxug.com/i/c/v4/sleet.svg
+http://icons.wxug.com/i/c/v4/rain.svg
+http://icons.wxug.com/i/c/v4/snow.svg
+http://icons.wxug.com/i/c/v4/sunny.svg
+http://icons.wxug.com/i/c/v4/tstorms.svg
+http://icons.wxug.com/i/c/v4/nt_chanceflurries.svg
+http://icons.wxug.com/i/c/v4/nt_chancerain.svg
+http://icons.wxug.com/i/c/v4/nt_chancesleet.svg
+http://icons.wxug.com/i/c/v4/nt_chancesnow.svg
+http://icons.wxug.com/i/c/v4/nt_chancetstorms.svg
+http://icons.wxug.com/i/c/v4/nt_clear.svg
+http://icons.wxug.com/i/c/v4/nt_cloudy.svg
+http://icons.wxug.com/i/c/v4/nt_flurries.svg
+http://icons.wxug.com/i/c/v4/nt_fog.svg
+http://icons.wxug.com/i/c/v4/nt_hazy.svg
+http://icons.wxug.com/i/c/v4/nt_mostlycloudy.svg
+http://icons.wxug.com/i/c/v4/nt_mostlysunny.svg
+http://icons.wxug.com/i/c/v4/nt_partlycloudy.svg
+http://icons.wxug.com/i/c/v4/nt_partlysunny.svg
+http://icons.wxug.com/i/c/v4/nt_sleet.svg
+http://icons.wxug.com/i/c/v4/nt_rain.svg
+http://icons.wxug.com/i/c/v4/nt_snow.svg
+http://icons.wxug.com/i/c/v4/nt_sunny.svg
+http://icons.wxug.com/i/c/v4/nt_tstorms.svg
+http://icons.wxug.com/i/c/v4/unknown.svg
+
+*/
