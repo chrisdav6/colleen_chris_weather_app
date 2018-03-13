@@ -78,7 +78,7 @@ $(function() {
       var summary = data.current_observation.weather;
 
       //For Testing
-      // var summary = "Sleet";
+      // summary = "Snow";
 
       $(".temp").html(temp + "&#176;");
       $(".feels").html("Feels like " + feelsTemp + "&#176;");
@@ -90,39 +90,44 @@ $(function() {
         case "Clear":
         case "Mostly Sunny":
         case "Partly Sunny":
-          $("body").addClass("clear-day");
-          $("#icon").append("<img src='http://icons.wxug.com/i/c/v4/clear.svg'>");
+          $("body").removeClass().addClass("clear-day");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/clear.svg'>");
           $(".message").text(sayings.clear[randomClear]);
           break;
         case "Mostly Cloudy":
         case "Partly Cloudy":
         case "Overcast":
-          $("body").addClass("mostly-cloudy-day");
-          $("#icon").append("<img src='http://icons.wxug.com/i/c/v4/mostlycloudy.svg'>");
+          $("body").removeClass().addClass("mostly-cloudy-day");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/mostlycloudy.svg'>");
           $(".message").text(sayings.partlyCloudyDay[randomPartlyCloudyDay]);
           break;
         case "Cloudy":
-          $("body").addClass("cloudy");
-          $("#icon").append("<img src='http://icons.wxug.com/i/c/v4/cloudy.svg'>");
+          $("body").removeClass().addClass("cloudy");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/cloudy.svg'>");
           $(".message").text(sayings.cloudy[randomCloudy]);
+          break;
         case "Snow":
         case "Flurries":
-          $("body").addClass("snow");
-          $("#icon").append("<img src='http://icons.wxug.com/i/c/v4/snow.svg'>");
+          $("body").removeClass().addClass("snow");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/snow.svg'>");
           $(".message").text(sayings.snow[randomSnow]);
+          break;
         case "Fog":
         case "Hazy":
-          $("body").addClass("fog");
-          $("#icon").append("<img src='http://icons.wxug.com/i/c/v4/fog.svg'>");
+          $("body").removeClass().addClass("fog");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/fog.svg'>");
           $(".message").text(sayings.fog[randomFog]);
+          break;
         case "Rain":
-          $("body").addClass("rain");
-          $("#icon").append("<img src='http://icons.wxug.com/i/c/v4/rain.svg'>");
+          $("body").removeClass().addClass("rain");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/rain.svg'>");
           $(".message").text(sayings.rain[randomRain]);
+          break;
         case "Sleet":
-          $("body").addClass("sleet");
-          $("#icon").append("<img src='http://icons.wxug.com/i/c/v4/sleet.svg'>");
+          $("body").removeClass().addClass("sleet");
+          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/sleet.svg'>");
           $(".message").text(sayings.sleet[randomSleet]);
+          break;
       }
       
 
