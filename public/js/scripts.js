@@ -1,257 +1,246 @@
-$(function() {
+let sayings = {
+  clear: [
+    "It's a beautiful day to be in Love with Colleen Davis!",
+    "Christopher Loves Colleen Davis on this beautiful day more times than an infinite javascript loop!",
+    "Colleen Davis, I love you 1 billiondy more than this beautiful day!",
+    "I could not have asked for a more beautiful day to be in Love with Colleen Davis",
+    "On this wonderful day, Christopher Loves Colleen",
+    "What a wonderful day to tell you that I will never finish falling in Love with you Colleen Davis!"
+  ],
+  clearNight: [
+    "On this fantastic night I love my baby, Colleen Davis",
+    "The moon is out and I Love Colleen Davis",
+    "What a beautiful starry night to be in Love with Colleen Davis",
+    "Stars in the sky and I Love Colleen to the moon and back * infinity!"
+  ],
+  partlyCloudyDay: [
+    "Freaking clouds! What the hell! I love you baby! <3",
+    "It's cloudy but I love my baby!",
+    "Stupid Clouds! They are kind of pretty though, like my sweetheart",
+    "It's a bit cloudy and I LOVE COLLEEN!",
+  ],
+  partlyCloudyNight: [
+    "Clouds in the night! What the hell! I love you baby! <3"
+  ],
+  cloudy: [
+    "I Love Clouds! I Love Colleen!"
+  ],
+  rain: [
+    "It's raining, it's pouring and I Love Colleen!",
+    "I really love rainy days, snuggling with my baby!",
+    "On this rainy day, I love my baby Colleen Davis!"
+  ],
+  sleet: [
+    "SLEET! What The! Ahh, who cares, because I Love Colleen Davis!",
+  ],
+  snow: [
+    "It's snowing outside, and i want to be inside with my baby Colleen!",
+    "The weather outside is frightful, but my baby Colleen is delightful!",
+    "The amount of snowflakes falling still can not amount to how much I Love Colleen Davis!"
+  ],
+  fog: [
+    "The beuaty of my baby Colleen is so clear to me, even through the fog.",
+  ]
+};
 
-  //Forecast AJAX Request
-  $.ajax({
-    url: "https://api.wunderground.com/api/3760db94f98044d8/forecast/q/NY/Troy.json",
-    dataType: "jsonp"
-  }).done(function(data) {
-
-    console.log(data);
-    var forecast = data.forecast.txt_forecast.forecastday[0].fcttext;
-    var highTemp = data.forecast.simpleforecast.forecastday[0].high.fahrenheit;
-    var lowTemp = data.forecast.simpleforecast.forecastday[0].low.fahrenheit;
-    
-    //Current Temp AJAX Request
-    $.ajax({
-      url: "https://api.wunderground.com/api/3760db94f98044d8/conditions_v11/q/NY/Troy.json",
-      dataType: "jsonp"
-    }).done(function(data) {
-
-      console.log(data);
-
-      //Sayings
-      var sayings = {
-        clear: [
-          "It's a beautiful day to be in Love with Colleen Davis!",
-          "Christopher Loves Colleen Davis on this beautiful day more times than an infinite javascript loop!",
-          "Colleen Davis, I love you 1 billiondy more than this beautiful day!",
-          "I could not have asked for a more beautiful day to be in Love with Colleen Davis",
-          "On this wonderful day, Christopher Loves Colleen",
-          "What a wonderful day to tell you that I will never finish falling in Love with you Colleen Davis!"
-        ],
-        clearNight: [
-          "On this fantastic night I love my baby, Colleen Davis",
-          "The moon is out and I Love Colleen Davis",
-          "What a beautiful starry night to be in Love with Colleen Davis",
-          "Stars in the sky and I Love Colleen to the moon and back * infinity!"
-        ],
-        partlyCloudyDay: [
-          "Freaking clouds! What the hell! I love you baby! <3"
-        ],
-        partlyCloudyNight: [
-          "Clouds in the night! What the hell! I love you baby! <3"
-        ],
-        cloudy: [
-          "I Love Clouds! I Love Colleen!"
-        ],
-        rain: [
-          "It's raining, it's pouring and I Love Colleen!",
-          "I really love rainy days, snuggling with my baby!",
-          "On this rainy day, I love my baby Colleen Davis!"
-        ],
-        sleet: [
-          "SLEET! What The! Ahh, who cares, because I Love Colleen Davis!",
-        ],
-        snow: [
-          "It's snowing outside, and i want to be inside with my baby Colleen!",
-          "The weather outside is frightful, but my baby Colleen is delightful!",
-          "The amount of snowflakes falling still can not amount to how much I Love Colleen Davis!"
-        ],
-        fog: [
-          "The beuaty of my baby Colleen is so clear to me, even through the fog.",
-        ]
-      };
+//Random Number for sayings
+var randomClear = Math.floor(Math.random() * sayings.clear.length);
+var randomClearNight = Math.floor(Math.random() * sayings.clearNight.length);
+var randomPartlyCloudyDay = Math.floor(Math.random() * sayings.partlyCloudyDay.length);
+var randomPartlyCloudyNight = Math.floor(Math.random() * sayings.partlyCloudyNight.length);
+var randomCloudy = Math.floor(Math.random() * sayings.cloudy.length);
+var randomRain = Math.floor(Math.random() * sayings.rain.length);
+var randomSleet = Math.floor(Math.random() * sayings.sleet.length);
+var randomSnow = Math.floor(Math.random() * sayings.snow.length);
+var randomFog = Math.floor(Math.random() * sayings.fog.length);
 
 
-      //Random Number for sayings
-      var randomClear = Math.floor(Math.random() * sayings.clear.length);
-      var randomClearNight = Math.floor(Math.random() * sayings.clearNight.length);
-      var randomPartlyCloudyDay = Math.floor(Math.random() * sayings.partlyCloudyDay.length);
-      var randomPartlyCloudyNight = Math.floor(Math.random() * sayings.partlyCloudyNight.length);
-      var randomCloudy = Math.floor(Math.random() * sayings.cloudy.length);
-      var randomRain = Math.floor(Math.random() * sayings.rain.length);
-      var randomSleet = Math.floor(Math.random() * sayings.sleet.length);
-      var randomSnow = Math.floor(Math.random() * sayings.snow.length);
-      var randomFog = Math.floor(Math.random() * sayings.fog.length);
+const url = "http://localhost:3000/weather";
 
-      //Grab temp and summary, then add to frontend
-      var temp = Math.round(data.current_observation.temp_f);
-      var feelsTemp = data.current_observation.feelslike_f;
-      var summary = data.current_observation.weather;
+fetch(url)
+  .then((res) => res.json())
+  .then((data) => {
 
-      //For Testing
-      // summary = "Thunderstorm";
+    $(".temp").html(data.forecast.temp + "&#176;");
+    $(".highLow").html("<i class='fas fa-long-arrow-alt-down'></i> " + data.forecast.lowTemp + "&#176; / <i class='fas fa-long-arrow-alt-up'></i> " + data.forecast.highTemp + "&#176;");
+    $(".summary").html(data.forecast.forecast);
+    $(".forecast").html(data.forecast.summary);
 
-      $(".temp").html(temp + "&#176;");
-      $(".highLow").html("<i class='fas fa-long-arrow-alt-down'></i> " + lowTemp + "&#176; / <i class='fas fa-long-arrow-alt-up'></i> " + highTemp + "&#176;");
-      $(".summary").html(summary);
-      $(".forecast").html(forecast);
+    switch (data.forecast.forecast) {
+      case "Clear":
+        $("body").removeClass().addClass("clear-day");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/clear.svg'>");
+        $(".message").text(sayings.clear[randomClear]);
+        break;
 
+      case "Mostly Sunny":
+        $("body").removeClass().addClass("clear-day");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/mostlysunny.svg'>");
+        $(".message").text(sayings.clear[randomClear]);
+        break;
 
-      switch (summary) {
-        case "Clear":
-          $("body").removeClass().addClass("clear-day");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/clear.svg'>");
-          $(".message").text(sayings.clear[randomClear]);
-          break;
-          
-        case "Mostly Sunny":
-          $("body").removeClass().addClass("clear-day");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/mostlysunny.svg'>");
-          $(".message").text(sayings.clear[randomClear]);
-          break;
-          
-        case "Partly Sunny":
-          $("body").removeClass().addClass("clear-day");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/partlysunny.svg'>");
-          $(".message").text(sayings.clear[randomClear]);
-          break;
-          
-        case "Mostly Cloudy":
-        case "Overcast":
-        case "Scattered Clouds":
-          $("body").removeClass().addClass("mostly-cloudy-day");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/mostlycloudy.svg'>");
-          $(".message").text(sayings.partlyCloudyDay[randomPartlyCloudyDay]);
-          break;
-          
-        case "Partly Cloudy":
-          $("body").removeClass().addClass("mostly-cloudy-day");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/partlycloudy.svg'>");
-          $(".message").text(sayings.partlyCloudyDay[randomPartlyCloudyDay]);
-          break;
-          
-        case "Cloudy":
-          $("body").removeClass().addClass("cloudy");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/cloudy.svg'>");
-          $(".message").text(sayings.cloudy[randomCloudy]);
-          break;
-          
-        case "Snow":
-        case "Flurries":
-        case "Light Snow":
-        case "Heavy Snow":
-        case "Low Drifting Snow":
-        case "Light Low Drifting Snow":
-        case "Heavy Low Drifting Snow":
-        case "Blowing Snow":
-        case "Light Blowing Snow":
-        case "Heavy Blowing Snow":
-        case "Snow Showers":
-        case "Light Snow Showers":
-        case "Heavy Snow Showers":
-        case "Snow Blowing Snow Mist":
-        case "Light Snow Blowing Snow Mist":
-        case "Heavy Snow Blowing Snow Mist":
-        case "Thunderstorms and Snow":
-        case "Light Thunderstorms and Snow":
-        case "Heavy Thunderstorms and Snow":
-        case "Squalls":
-          $("body").removeClass().addClass("snow");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/snow.svg'>");
-          $(".message").text(sayings.snow[randomSnow]);
-          break;
-          
-        case "Fog":
-        case "Light Fog":
-        case "Heavy Fog":
-        case "Fog Patches":
-        case "Light Fog Patches":
-        case "Heavy Fog Patches":
-        case "Haze":
-        case "Light Haze":
-        case "Heavy Haze":
-        case "Freezing Fog":
-        case "Light Freezing Fog":
-        case "Heavy Freezing Fog":
-        case "Patches of Fog":
-        case "Shallow Fog":
-        case "Partial Fog":
-          $("body").removeClass().addClass("fog");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/fog.svg'>");
-          $(".message").text(sayings.fog[randomFog]);
-          break;
-          
-        case "Rain":
-        case "Light Rain":
-        case "Heavy Rain":
-        case "Drizzle":
-        case "Light Drizzle":
-        case "Heavy Drizzle":
-        case "Mist":
-        case "Light Mist":
-        case "Heavy Mist":
-        case "Rain Mist":
-        case "Light Rain Mist":
-        case "Heavy Rain Mist":
-        case "Rain Showers":
-        case "Light Rain Showers":
-        case "Heavy Rain Showers":
-          $("body").removeClass().addClass("rain");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/rain.svg'>");
-          $(".message").text(sayings.rain[randomRain]);
-          break;
-          
-        case "Thunderstorm":
-        case "Light Thunderstorm":
-        case "Heavy Thunderstorm":
-        case "Thunderstorms and Rain":
-        case "Light Thunderstorms and Rain":
-        case "Heavy Thunderstorms and Rain":
-        case "Thunderstorms and Ice Pellets":
-        case "Light Thunderstorms and Ice Pellets":
-        case "Heavy Thunderstorms and Ice Pellets":
-        case "Thunderstorms with Hail":
-        case "Light Thunderstorms with Hail":
-        case "Heavy Thunderstorms with Hail":
-        case "Thunderstorms with Small Hail":
-        case "Light Thunderstorms with Small Hail":
-        case "Heavy Thunderstorms with Small Hail":
-          $("body").removeClass().addClass("rain");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/tstorms.svg'>");
-          $(".message").text(sayings.rain[randomRain]);
-          break;
-          
-        case "Sleet":
-        case "Snow Grains":
-        case "Light Snow Grains":
-        case "Heavy Snow Grains":
-        case "Ice Crystals":
-        case "Light Ice Crystals":
-        case "Heavy Ice Crystals":
-        case "Ice Pellets":
-        case "Light Ice Pellets":
-        case "Heavy Ice Pellets":
-        case "Hail":
-        case "Light Hail":
-        case "Heavy Hail":
-        case "Ice Pellet Showers":
-        case "Light Ice Pellet Showers":
-        case "Heavy Ice Pellet Showers":
-        case "Hail Showers":
-        case "Light Hail Showers":
-        case "Heavy Hail Showers":
-        case "Small Hail Showers":
-        case "Light Small Hail Showers":
-        case "Heavy Small Hail Showers":
-        case "Freezing Drizzle":
-        case "Light Freezing Drizzle":
-        case "Heavy Freezing Drizzle":
-        case "Freezing Rain":
-        case "Light Freezing Rain":
-        case "Heavy Freezing Rain":
-        case "Small Hail":
-          $("body").removeClass().addClass("sleet");
-          $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/sleet.svg'>");
-          $(".message").text(sayings.sleet[randomSleet]);
-          break;
-      }
-      
+      case "Partly Sunny":
+        $("body").removeClass().addClass("clear-day");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/partlysunny.svg'>");
+        $(".message").text(sayings.clear[randomClear]);
+        break;
 
-    });
+      case "Mostly Cloudy":
+      case "Overcast":
+      case "Scattered Clouds":
+        $("body").removeClass().addClass("mostly-cloudy-day");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/mostlycloudy.svg'>");
+        $(".message").text(sayings.partlyCloudyDay[randomPartlyCloudyDay]);
+        break;
+
+      case "Partly Cloudy":
+        $("body").removeClass().addClass("mostly-cloudy-day");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/partlycloudy.svg'>");
+        $(".message").text(sayings.partlyCloudyDay[randomPartlyCloudyDay]);
+        break;
+
+      case "Cloudy":
+        $("body").removeClass().addClass("cloudy");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/cloudy.svg'>");
+        $(".message").text(sayings.cloudy[randomCloudy]);
+        break;
+
+      case "Snow":
+      case "Flurries":
+      case "Light Snow":
+      case "Heavy Snow":
+      case "Low Drifting Snow":
+      case "Light Low Drifting Snow":
+      case "Heavy Low Drifting Snow":
+      case "Blowing Snow":
+      case "Light Blowing Snow":
+      case "Heavy Blowing Snow":
+      case "Snow Showers":
+      case "Light Snow Showers":
+      case "Heavy Snow Showers":
+      case "Snow Blowing Snow Mist":
+      case "Light Snow Blowing Snow Mist":
+      case "Heavy Snow Blowing Snow Mist":
+      case "Thunderstorms and Snow":
+      case "Light Thunderstorms and Snow":
+      case "Heavy Thunderstorms and Snow":
+      case "Squalls":
+        $("body").removeClass().addClass("snow");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/snow.svg'>");
+        $(".message").text(sayings.snow[randomSnow]);
+        break;
+
+      case "Fog":
+      case "Light Fog":
+      case "Heavy Fog":
+      case "Fog Patches":
+      case "Light Fog Patches":
+      case "Heavy Fog Patches":
+      case "Haze":
+      case "Light Haze":
+      case "Heavy Haze":
+      case "Freezing Fog":
+      case "Light Freezing Fog":
+      case "Heavy Freezing Fog":
+      case "Patches of Fog":
+      case "Shallow Fog":
+      case "Partial Fog":
+        $("body").removeClass().addClass("fog");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/fog.svg'>");
+        $(".message").text(sayings.fog[randomFog]);
+        break;
+
+      case "Rain":
+      case "Light Rain":
+      case "Heavy Rain":
+      case "Drizzle":
+      case "Light Drizzle":
+      case "Heavy Drizzle":
+      case "Mist":
+      case "Light Mist":
+      case "Heavy Mist":
+      case "Rain Mist":
+      case "Light Rain Mist":
+      case "Heavy Rain Mist":
+      case "Rain Showers":
+      case "Light Rain Showers":
+      case "Heavy Rain Showers":
+        $("body").removeClass().addClass("rain");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/rain.svg'>");
+        $(".message").text(sayings.rain[randomRain]);
+        break;
+
+      case "Thunderstorm":
+      case "Light Thunderstorm":
+      case "Heavy Thunderstorm":
+      case "Thunderstorms and Rain":
+      case "Light Thunderstorms and Rain":
+      case "Heavy Thunderstorms and Rain":
+      case "Thunderstorms and Ice Pellets":
+      case "Light Thunderstorms and Ice Pellets":
+      case "Heavy Thunderstorms and Ice Pellets":
+      case "Thunderstorms with Hail":
+      case "Light Thunderstorms with Hail":
+      case "Heavy Thunderstorms with Hail":
+      case "Thunderstorms with Small Hail":
+      case "Light Thunderstorms with Small Hail":
+      case "Heavy Thunderstorms with Small Hail":
+        $("body").removeClass().addClass("rain");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/tstorms.svg'>");
+        $(".message").text(sayings.rain[randomRain]);
+        break;
+
+      case "Sleet":
+      case "Snow Grains":
+      case "Light Snow Grains":
+      case "Heavy Snow Grains":
+      case "Ice Crystals":
+      case "Light Ice Crystals":
+      case "Heavy Ice Crystals":
+      case "Ice Pellets":
+      case "Light Ice Pellets":
+      case "Heavy Ice Pellets":
+      case "Hail":
+      case "Light Hail":
+      case "Heavy Hail":
+      case "Ice Pellet Showers":
+      case "Light Ice Pellet Showers":
+      case "Heavy Ice Pellet Showers":
+      case "Hail Showers":
+      case "Light Hail Showers":
+      case "Heavy Hail Showers":
+      case "Small Hail Showers":
+      case "Light Small Hail Showers":
+      case "Heavy Small Hail Showers":
+      case "Freezing Drizzle":
+      case "Light Freezing Drizzle":
+      case "Heavy Freezing Drizzle":
+      case "Freezing Rain":
+      case "Light Freezing Rain":
+      case "Heavy Freezing Rain":
+      case "Small Hail":
+        $("body").removeClass().addClass("sleet");
+        $("#icon").html("<img src='http://icons.wxug.com/i/c/v4/sleet.svg'>");
+        $(".message").text(sayings.sleet[randomSleet]);
+        break;
+    };
   });
 
-});
+
+
+
+
+
+
+
+
+
+//For Testing
+// summary = "Thunderstorm";
+
+
+
+
 
 
 
