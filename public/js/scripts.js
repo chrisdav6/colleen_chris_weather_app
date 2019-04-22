@@ -55,9 +55,10 @@ var randomSnow = Math.floor(Math.random() * sayings.snow.length);
 var randomFog = Math.floor(Math.random() * sayings.fog.length);
 
 
-const url = "http://localhost:3000/weather";
+const localUrl = "http://localhost:3000/weather";
+const herokuUrl = "https://chris-loves-colleen-weather.herokuapp.com/weather";
 
-fetch(url)
+fetch(herokuUrl)
   .then((res) => res.json())
   .then((data) => {
 
