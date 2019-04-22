@@ -56,7 +56,7 @@ var randomFog = Math.floor(Math.random() * sayings.fog.length);
 
 
 const localUrl = "http://localhost:3000/weather";
-const herokuUrl = "/weather";
+const herokuUrl = "https://chris-loves-colleen-weather.herokuapp.com/weather";
 
 fetch(herokuUrl)
   .then((res) => res.json())
