@@ -7,6 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp | node src/app.js"
   },
+  "engines": {
+    "node": "^10.0.0",
+    "npm": "^6.0.0"
+  },
   "keywords": [
     "bootstrap",
     "weather underground"
@@ -14,17 +18,17 @@
   "author": "Chris Davis",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "4.0.0",
+    "bootstrap": "^4.6.0",
     "dotenv": "^7.0.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.2.1",
+    "jquery": "^3.6.0",
     "popper.js": "^1.12.9",
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.23.5",
+    "browser-sync": "^2.26.14",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0"
   }
